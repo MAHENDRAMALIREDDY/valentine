@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Promise Day</title>
+<style>
+body{
+  background:#0f3460;
+  color:white;
+  text-align:center;
+  font-family:sans-serif;
+}
+input{
+  padding:10px;
+  width:70%;
+  border-radius:10px;
+  border:none;
+}
+button{
+  margin-top:10px;
+  padding:10px 20px;
+  border-radius:15px;
+  border:none;
+  background:#e94560;
+  color:white;
+  font-size:1rem;
+}
+.saved{
+  margin-top:20px;
+  opacity:0.8;
+}
+.back-home {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  text-decoration: none;
+  color: white;
+  font-size: 0.95rem;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+  z-index: 10;
+}
+
+.back-home:hover {
+  opacity: 1;
+}
+
+</style>
+</head>
+<body>
+<a href="../index.html" class="back-home">← Back to Home</a>
+
+<h1>🤞 Promise Day</h1>
+
+<ul>
+  <li>I promise to listen even when it’s hard</li>
+  <li>I promise to choose you every day</li>
+  <li>I promise to grow with you</li>
+</ul>
+
+<input id="p" placeholder="Write your promise here">
+<br>
+<button onclick="save()">Save Promise</button>
+
+<p class="saved" id="savedText"></p>
+
+<script src="../personalize.js"></script>
+<script>
+const saved = localStorage.getItem("herPromise");
+
+if (saved) {
+  savedText.innerText = `Your promise to me:\n"${saved}" 💖`;
+}
+
+function save(){
+  const val = p.value.trim();
+  if(!val) return;
+  localStorage.setItem("herPromise", val);
+  savedText.innerText = `Your promise to me:\n"${val}" 💖`;
+  p.value = "";
+}
+</script>
+
+</body>
+</html>

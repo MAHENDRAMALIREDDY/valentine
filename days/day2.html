@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Propose Day</title>
+<style>
+body{background:#16213e;color:white;text-align:center;padding:40px;font-family:sans-serif;}
+#text{max-width:500px;margin:auto;font-size:1.2rem;}
+button{padding:12px 25px;border-radius:10px;font-size:1rem;border:none;margin:10px;}
+#no{position:relative;}
+.back-home {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  text-decoration: none;
+  color: white;
+  font-size: 0.95rem;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+  z-index: 10;
+}
+
+.back-home:hover {
+  opacity: 1;
+}
+
+</style>
+</head>
+<body>
+<a href="../index.html" class="back-home">← Back to Home</a>
+
+<h1>💍 Propose Day</h1>
+<div id="text"></div>
+
+<button onclick="yes()">Yes 💖</button>
+<button id="no" onmouseover="move()">No 😅</button>
+
+<script src="../personalize.js"></script>
+<script>
+const msg = `Hey ${loveProfile.herName},
+
+Somewhere between ${loveProfile.firstMemory}
+and today,
+you became my favorite part of everything.
+
+So tell me honestly…`;
+
+let i=0;
+setInterval(()=>{
+  if(i<msg.length) text.innerHTML+=msg[i++];
+},40);
+
+function move(){
+  no.style.left=Math.random()*200+"px";
+}
+function yes(){
+  alert(`You just made me smile like an idiot, ${loveProfile.nickname} 💘`);
+}
+</script>
+
+</body>
+</html>
