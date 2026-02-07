@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Valentine’s Day</title>
+<style>
+body{background:black;color:white;text-align:center;padding:50px;font-family:sans-serif;}
+.back-home {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  text-decoration: none;
+  color: white;
+  font-size: 0.95rem;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+  z-index: 10;
+}
+
+.back-home:hover {
+  opacity: 1;
+}
+
+</style>
+</head>
+<body>
+<a href="../index.html" class="back-home">← Back to Home</a>
+
+<p id="final"></p>
+<h2 id="end"></h2>
+
+<button id="playMusic" style="
+  padding:12px 25px;
+  border-radius:20px;
+  border:none;
+  background:#e94560;
+  color:white;
+  font-size:1rem;
+  cursor:pointer;
+  margin-top:20px;
+">
+▶ Play our song
+</button>
+
+<audio id="song" loop>
+  <source src="../assets/music/yoursong.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const btn = document.getElementById("playMusic");
+const song = document.getElementById("song");
+
+btn.onclick = () => {
+  song.play();
+  btn.innerText = "🎵 Playing…";
+};
+</script>
+
+<script src="../personalize.js"></script>
+<p id="miniCountdown" style="opacity:0.7;"></p>
+
+<script>
+const end = new Date(2026,1,14).getTime();
+setInterval(()=>{
+  const now = new Date().getTime();
+  const d = end - now;
+  if(d <= 0){
+    miniCountdown.innerText = "It’s finally today ❤️";
+    return;
+  }
+  const h = Math.floor((d / (1000*60*60)) % 24);
+  const m = Math.floor((d / (1000*60)) % 60);
+  miniCountdown.innerText = `Just ${h}h ${m}m to go…`;
+},1000);
+</script>
+
+<script>
+final.innerHTML = `
+Hey ${loveProfile.herName},<br><br>
+Out of every version of my life,<br>
+I'd still choose the one where I meet you.
+`;
+end.innerText = loveProfile.futureLine;
+</script>
+
+</body>
+</html>

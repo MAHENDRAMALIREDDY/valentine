@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Seven Days With You</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- background stars -->
+<canvas id="stars"></canvas>
+<!-- Left photo carousel -->
+<div class="photo-carousel left">
+  <img src="assets/images/photo1.jpg" />
+  <img src="assets/images/photo2.jpg" />
+  <img src="assets/images/photo3.jpg" />
+</div>
+
+<!-- Right photo carousel -->
+<div class="photo-carousel right">
+  <img src="assets/images/photo4.jpg" />
+  <img src="assets/images/photo5.jpg" />
+  <img src="assets/images/photo6.jpg" />
+</div>
+
+<div class="container">
+
+  <h1>Seven Days With You, Kutty 💖</h1>
+
+  <p class="subtitle">
+    I didn’t want to rush this.<br>
+    So I made something that unfolds slowly… like us.
+  </p>
+
+  <!-- Countdown -->
+  <div id="countdownBox">
+    <p class="countdownText">Valentine’s Day unlocks in</p>
+    <div id="pulseWrap">
+      <span id="heart">❤️</span>
+      <h2 id="countdown">--</h2>
+    </div>
+  </div>
+
+  <!-- Days -->
+  <div class="doors">
+  <a class="door" data-day="1" href="days/day1.html">🌹 Rose Day</a>
+  <a class="door" data-day="2" href="days/day2/index.html">💍 Propose Day</a>
+  <a class="door" data-day="3" href="days/day3.html">🍫 Chocolate Day</a>
+
+  <a class="door" data-day="4" href="days/day4.html">🧸 Teddy Day</a>
+  <a class="door" data-day="5" href="days/day5.html">🤞 Promise Day</a>
+  <a class="door" data-day="6" href="days/day6.html">🤗 Hug Day</a>
+
+  <a class="door final" data-day="7" href="days/day7.html">
+    ❤️ Valentine’s Day
+  </a>
+</div>
+
+  <p class="footer">Some things are worth waiting for ✨</p>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

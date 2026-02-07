@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Propose Day 💍</title>
+
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: radial-gradient(circle at top, #1a1a2e, #0f0f1a);
+      font-family: "Segoe UI", sans-serif;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    /* micro stars canvas */
+    #stars {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .back-home {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      color: white;
+      text-decoration: none;
+      opacity: 0.6;
+      font-size: 0.9rem;
+      z-index: 2;
+    }
+
+    .back-home:hover { opacity: 1; }
+
+    .stage {
+      position: relative;
+      z-index: 1;
+      max-width: 640px;
+      padding: 40px;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 30px;
+      letter-spacing: -0.02em;
+    }
+
+    #line {
+      font-size: 1.4rem;
+      line-height: 1.7;
+      opacity: 0.85;
+      min-height: 70px;
+    }
+
+    /* premium button */
+    .cta {
+      margin-top: 50px;
+      padding: 16px 44px;
+      font-size: 1.1rem;
+      border-radius: 50px;
+      border: none;
+      background: linear-gradient(135deg, #ff6b9a, #ff3c7d);
+      color: white;
+      cursor: pointer;
+      box-shadow:
+        0 10px 30px rgba(255, 60, 125, 0.35),
+        inset 0 -2px 6px rgba(0,0,0,0.2);
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.3s ease;
+    }
+
+    .cta.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .cta:hover {
+      box-shadow:
+        0 14px 40px rgba(255, 60, 125, 0.45),
+        inset 0 -2px 6px rgba(0,0,0,0.25);
+    }
+
+    .cta:active {
+      transform: translateY(2px);
+    }
+
+    @media (max-width: 480px) {
+      h1 { font-size: 2.4rem; }
+      #line { font-size: 1.2rem; }
+    }
+  </style>
+</head>
+
+<body>
+
+<canvas id="stars"></canvas>
+
+<a href="../../index.html" class="back-home">← Back</a>
+
+<div class="stage">
+  <h1>Propose Day</h1>
+  <p id="line">Some things can’t be rushed.</p>
+  <button id="stayBtn" class="cta">I’m here</button>
+</div>
+
+<script>
+  /* ---------- TEXT TIMING ---------- */
+  const line = document.getElementById("line");
+  const button = document.getElementById("stayBtn");
+
+  button.style.display = "none";
+
+  setTimeout(() => {
+    line.innerText = "If you’re here, stay for a moment.";
+  }, 3500);
+
+  setTimeout(() => {
+    line.innerText = "Still here?";
+    button.style.display = "inline-block";
+    requestAnimationFrame(() => button.classList.add("show"));
+  }, 8000);
+
+  button.onclick = () => {
+    window.location.href = "quiz.html";
+  };
+
+  /* ---------- MICRO STARS ---------- */
+  const canvas = document.getElementById("stars");
+  const ctx = canvas.getContext("2d");
+
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener("resize", resize);
+
+  const stars = Array.from({ length: 70 }, () => ({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    r: Math.random() * 1.2 + 0.3,
+    speed: Math.random() * 0.08 + 0.02
+  }));
+
+  function drawStars() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "rgba(255,255,255,0.6)";
+
+    stars.forEach(s => {
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fill();
+
+      s.y += s.speed;
+      if (s.y > canvas.height) {
+        s.y = -2;
+        s.x = Math.random() * canvas.width;
+      }
+    });
+
+    requestAnimationFrame(drawStars);
+  }
+
+  drawStars();
+</script>
+
+</body>
+</html>

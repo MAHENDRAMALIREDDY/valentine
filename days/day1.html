@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Rose Day 🌹</title>
+
+  <style>
+    /* ---------- Base ---------- */
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Segoe UI", sans-serif;
+      background: linear-gradient(160deg, #0f2027, #203a43, #2c5364);
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      overflow: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* ---------- Back ---------- */
+    .back-home {
+      position: fixed;
+      top: 18px;
+      left: 18px;
+      text-decoration: none;
+      color: white;
+      opacity: 0.6;
+      font-size: 0.9rem;
+      z-index: 5;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    .back-home:hover {
+      opacity: 1;
+      transform: translateX(-2px);
+    }
+
+    /* ---------- Petals ---------- */
+    #petals {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      filter: blur(0.3px);
+      opacity: 0.9;
+    }
+
+    /* ---------- Card ---------- */
+    .card {
+      position: relative;
+      z-index: 2;
+      max-width: 520px;
+      padding: 30px;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 8px;
+      letter-spacing: -0.01em;
+    }
+
+    .subtitle {
+      opacity: 0.7;
+      margin-bottom: 28px;
+      line-height: 1.5;
+      letter-spacing: 0.01em;
+    }
+
+    /* ---------- Rose ---------- */
+    .rose-wrapper {
+      position: relative;
+      display: inline-block;
+      margin: 36px 0 28px;
+    }
+
+    .rose-glow {
+      position: absolute;
+      inset: -35px;
+      background: radial-gradient(
+        circle,
+        rgba(255,150,170,0.18),
+        transparent 68%
+      );
+      filter: blur(8px);
+      z-index: 0;
+    }
+
+    .rose {
+      position: relative;
+      z-index: 1;
+      font-size: 90px;
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+    @keyframes breathe {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.07); }
+      100% { transform: scale(1); }
+    }
+
+    /* ---------- Text ---------- */
+    .text-block {
+      margin-top: 20px;
+      padding: 0 10px;
+      line-height: 1.75;
+      font-size: 1.05rem;
+      letter-spacing: 0.005em;
+    }
+
+    .line {
+      margin-top: 18px;
+      color: rgba(255,255,255,0.92);
+    }
+
+    .line + .line {
+      color: rgba(255,255,255,0.88);
+    }
+
+    .soft {
+      color: rgba(255,255,255,0.65);
+    }
+
+    .divider {
+      width: 40px;
+      height: 2px;
+      background: rgba(255,255,255,0.15);
+      margin: 35px auto;
+      border-radius: 1px;
+      opacity: 0.18;
+      transform: scaleX(0.9);
+    }
+
+    .moment {
+      margin-top: 22px;
+      font-size: 0.85rem;
+      opacity: 0.45;
+      font-style: italic;
+    }
+
+    .week-hint {
+      margin-top: 42px;
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      opacity: 0.35;
+      text-transform: uppercase;
+    }
+
+    /* ---------- Mobile ---------- */
+    @media (max-width: 480px) {
+      .rose { font-size: 76px; }
+      .card { padding: 22px; }
+    }
+  </style>
+</head>
+
+<body>
+
+<a href="../index.html" class="back-home">← Back to Home</a>
+
+<canvas id="petals"></canvas>
+
+<div class="card">
+  <h1>Rose Day 🌹</h1>
+
+  <p class="subtitle">
+    Before the week begins,<br>
+    I wanted you to pause here for a moment.
+  </p>
+
+  <div class="rose-wrapper">
+    <div class="rose-glow"></div>
+    <div class="rose">🌹</div>
+  </div>
+
+  <div class="text-block">
+    <div class="line">
+      Then this rose is telling you that out of everything,
+      out of everyone,
+      out of every moment…
+    </div>
+
+    <div class="line">
+      you are the one I keep choosing.
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="line soft">
+      And this week is just another way of showing that.
+    </div>
+  </div>
+
+  <div id="moment" class="moment"></div>
+
+  <div class="week-hint">
+    Day 1 of 7
+  </div>
+</div>
+
+<script>
+  /* ---------- Petal Background ---------- */
+  const canvas = document.getElementById("petals");
+  const ctx = canvas.getContext("2d");
+
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener("resize", resize);
+
+  const petals = Array.from({ length: 55 }, () => ({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    r: Math.random() * 2 + 1.2,
+    speed: Math.random() * 0.3 + 0.1,
+    sway: Math.random() * 0.6 - 0.3
+  }));
+
+  function drawPetals() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "rgba(255,182,193,0.55)";
+
+    petals.forEach(p => {
+      ctx.beginPath();
+      ctx.ellipse(p.x, p.y, p.r * 1.4, p.r, Math.PI / 4, 0, Math.PI * 2);
+      ctx.fill();
+
+      p.y += p.speed;
+      p.x += p.sway;
+
+      if (p.y > canvas.height) {
+        p.y = -10;
+        p.x = Math.random() * canvas.width;
+      }
+      if (p.x < 0 || p.x > canvas.width) {
+        p.sway *= -1;
+      }
+    });
+
+    requestAnimationFrame(drawPetals);
+  }
+  drawPetals();
+
+  /* ---------- Unique Memory ---------- */
+  const key = "roseDayMoment";
+
+  function formatMoment(date) {
+    const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+    const h = date.getHours();
+    let period = "afternoon";
+    if (h < 6) period = "early morning";
+    else if (h < 11) period = "morning";
+    else if (h < 16) period = "afternoon";
+    else if (h < 20) period = "evening";
+    else period = "late night";
+
+    return `You opened this rose on a quiet ${days[date.getDay()]} ${period}.`;
+  }
+
+  let stored = localStorage.getItem(key);
+  if (!stored) {
+    stored = new Date().toISOString();
+    localStorage.setItem(key, stored);
+  }
+
+  document.getElementById("moment").innerText =
+    formatMoment(new Date(stored));
+</script>
+
+</body>
+</html>
