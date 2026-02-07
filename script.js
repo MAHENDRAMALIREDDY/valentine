@@ -41,7 +41,7 @@ const unlockSchedule = {
   7: new Date(2026, 1, 14)  // Valentine's Day
 };
 
-const today = new Date();
+//const today = new Date();
 today.setHours(0, 0, 0, 0);
 
 document.querySelectorAll(".door").forEach(door => {
